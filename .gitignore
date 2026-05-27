@@ -1,0 +1,7 @@
+*.pdf
+*.sh
+requirements.txt
+**.dSYM
+Dockerfile
+rush-01
+a.out
