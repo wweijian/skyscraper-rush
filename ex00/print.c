@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 18:54:41 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/27 21:38:16 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/29 00:58:01 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,6 @@ int	print_error(void)
 	return (1);
 }
 
-void	print_conditions(t_condition *condition)
-{
-	int		i;
-	int		j;
-	char	c;
-
-	i = 0;
-	while (i < SIZE)
-	{
-		j = 0;
-		while (j < SIZE) {
-			printf("pos: (%d, %d):\t", i, j);
-			fflush(stdout);
-			c = condition->top[i][j] + '0';
-			write(1, &c, 1);
-			write(1, ", ", 2);
-			c = condition->bottom[i][j] + '0';
-			write(1, &c, 1);
-			write(1, ", ", 2);
-			c = condition->left[i][j] + '0';
-			write(1, &c, 1);
-			write(1, ", ", 2);
-			c = condition->right[i][j] + '0';
-			write(1, &c, 1);
-			write(1, "\n", 1);
-			j++;
-		}
-		i++;
-	}
-}
-
 int	print_board(t_board board)
 {
 	int		i;
@@ -60,14 +29,52 @@ int	print_board(t_board board)
 	while (i < SIZE)
 	{
 		j = 0;
-		while (j < SIZE) {
-			c = board[i][j] + '0';
+		while (j < SIZE)
+		{
+			c = board[i][j] + '0' + 1;
 			write(1, &c, 1);
 			if (j != SIZE - 1)
 				write(1, " ", 1);
 			j++;
 		}
 		write(1, "\n", 1);
+		i++;
 	}
 	return (1);
 }
+
+/* #include <stdio.h>
+void	print_conditions(t_condition *condition)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < SIZE)
+	{
+		j = 0;
+		while (j < SIZE) {
+			printf("pos: (%d, %d):\t", i, j);
+			printf("top: %d, bottom: %d, left: %d, right: %d\n",
+				condition->top[i][j],
+				condition->bottom[i][j],
+				condition->left[i][j],
+				condition->right[i][j]);
+			j++;
+		}
+		i++;
+	}
+	puts("");
+} 
+	
+void	print_rules(t_rules rules)
+{
+	for (int i = 0; i < SIDES; i++) {
+		for (int j = 0; j < SIZE; j++) {
+			printf("%d ", rules[i][j]);
+		}
+		printf("\n");
+	}
+}
+	
+*/

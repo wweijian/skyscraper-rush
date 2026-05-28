@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 23:44:54 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/28 00:18:31 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/29 00:59:50 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	tallest_remainder(int remainder[SIZE])
 	{
 		if (remainder[i] == 1)
 			return (i);
-		i++;
+		i--;
 	}
-	return (0);
+	return (-1);
 }

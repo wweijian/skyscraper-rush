@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 18:54:06 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/27 21:37:32 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/29 00:58:50 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static inline int	ft_is_valid_num(char c)
 	return (c >= '1' && c <= '9' && c - '0' <= SIZE);
 }
 
-int		validate_args(char *arg, t_rules rules)
+int	validate_args(char *arg, t_rules rules)
 {
 	int	i;
 
@@ -38,7 +38,6 @@ int		validate_args(char *arg, t_rules rules)
 	}
 	return (arg[i] == 0);
 }
-
 
 /* 
 	rule structure:
