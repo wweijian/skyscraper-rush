@@ -12,8 +12,8 @@
 
 #include "rush.h"
 
-static int	validate_input(t_condition *condition, t_pos *pos, t_board *board,
-							t_input *input)
+static int	validate_input(t_condition *condition, t_pos *pos,
+							int (*board)[SIZE][SIZE], t_input *input)
 {
 	if (!check_top(condition->top, pos, board, input)
 		|| !check_left(condition->left, pos, board, input)

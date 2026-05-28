@@ -19,7 +19,7 @@ int	print_error(void)
 	return (1);
 }
 
-int	print_board(t_board board)
+int	print_board(int board[SIZE][SIZE])
 {
 	int		i;
 	int		j;
@@ -67,7 +67,7 @@ void	print_conditions(t_condition *condition)
 	puts("");
 } 
 	
-void	print_rules(t_rules rules)
+void	print_rules(int rules[SIDES][SIZE])
 {
 	for (int i = 0; i < SIDES; i++) {
 		for (int j = 0; j < SIZE; j++) {

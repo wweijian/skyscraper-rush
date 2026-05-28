@@ -12,14 +12,16 @@
 
 #include "rush.h"
 
-void	adjust_input(t_input *input, t_board board, t_pos *pos, int value)
+void	adjust_input(t_input *input, int board[SIZE][SIZE], t_pos *pos,
+			int value)
 {
 	board[pos->row][pos->col] = value;
 	input->horizontal[pos->row][value] = 0;
 	input->vertical[pos->col][value] = 0;
 }
 
-void	return_input(t_input *input, t_board board, t_pos *pos, int value)
+void	return_input(t_input *input, int board[SIZE][SIZE], t_pos *pos,
+			int value)
 {
 	input->horizontal[pos->row][value] = 1;
 	input->vertical[pos->col][value] = 1;

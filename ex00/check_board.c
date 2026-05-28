@@ -12,7 +12,8 @@
 
 #include "rush.h"
 
-int	check_left(int left[SIZE][SIZE], t_pos *pos, t_board *board, t_input *input)
+int	check_left(int left[SIZE][SIZE], t_pos *pos,
+				int (*board)[SIZE][SIZE], t_input *input)
 {
 	int	i;
 	int	tallest;
@@ -39,7 +40,8 @@ int	check_left(int left[SIZE][SIZE], t_pos *pos, t_board *board, t_input *input)
 	return (left[pos->row][pos->col] <= max && left[pos->row][pos->col] >= min);
 }
 
-int	check_top(int top[SIZE][SIZE], t_pos *pos, t_board *board, t_input *input)
+int	check_top(int top[SIZE][SIZE], t_pos *pos,
+				int (*board)[SIZE][SIZE], t_input *input)
 {
 	int	i;
 	int	tallest;
@@ -66,8 +68,8 @@ int	check_top(int top[SIZE][SIZE], t_pos *pos, t_board *board, t_input *input)
 	return (top[pos->row][pos->col] <= max && top[pos->row][pos->col] >= min);
 }
 
-int	check_right(int right[SIZE][SIZE], t_pos *pos, t_board *board
-					, t_input *input)
+int	check_right(int right[SIZE][SIZE], t_pos *pos,
+				int (*board)[SIZE][SIZE], t_input *input)
 {
 	int	i;
 	int	tallest;
@@ -93,8 +95,8 @@ int	check_right(int right[SIZE][SIZE], t_pos *pos, t_board *board
 			&& right[pos->row][pos->col] >= min);
 }
 
-int	check_bottom(int bottom[SIZE][SIZE], t_pos *pos, t_board *board
-					, t_input *input)
+int	check_bottom(int bottom[SIZE][SIZE], t_pos *pos,
+				int (*board)[SIZE][SIZE], t_input *input)
 {
 	int	i;
 	int	tallest;

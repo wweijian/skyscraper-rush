@@ -42,42 +42,44 @@ typedef struct s_input
 	int	vertical[SIZE][SIZE];
 }	t_input;
 
-typedef int	t_rules[SIDES][SIZE];
-typedef int	t_existing[SIZE];
-typedef int	t_board[SIZE][SIZE];
-
 // validate.c
-int		validate_args(char *arg, t_rules rules);
+int		validate_args(char *arg, int rules[SIDES][SIZE]);
 
 // print.c
 int		print_error(void);
-int		print_board(t_board board);
+int		print_board(int board[SIZE][SIZE]);
 
 // check_utils.c
 int		check_visibility(int value, int *tallest);
 int		tallest_remainder(int remainder[SIZE]);
 
 // check_board.c
-int		check_left(int left[SIZE][SIZE], t_pos *pos, t_board *board,
+int		check_left(int left[SIZE][SIZE], t_pos *pos,
+			int (*board)[SIZE][SIZE],
 			t_input *input);
-int		check_top(int top[SIZE][SIZE], t_pos *pos, t_board *board,
+int		check_top(int top[SIZE][SIZE], t_pos *pos,
+			int (*board)[SIZE][SIZE],
 			t_input *input);
-int		check_right(int right[SIZE][SIZE], t_pos *pos, t_board *board,
+int		check_right(int right[SIZE][SIZE], t_pos *pos,
+			int (*board)[SIZE][SIZE],
 			t_input *input);
-int		check_bottom(int bottom[SIZE][SIZE], t_pos *pos, t_board *board,
+int		check_bottom(int bottom[SIZE][SIZE], t_pos *pos,
+			int (*board)[SIZE][SIZE],
 			t_input *input);
 
 // solve.c
 int		solve(t_condition *condition, t_pos *pos, t_input *input);
 
 // solve_utils.c
-void	adjust_input(t_input *input, t_board board, t_pos *pos, int value);
-void	return_input(t_input *input, t_board board, t_pos *pos, int value);
+void	adjust_input(t_input *input, int board[SIZE][SIZE], t_pos *pos,
+			int value);
+void	return_input(t_input *input, int board[SIZE][SIZE], t_pos *pos,
+			int value);
 void	go_next_grid(t_pos *pos);
 void	restore_grid(t_pos *pos);
 
 // debug
 // void	print_conditions(t_condition *condition);
-// void	print_rules(t_rules rules);
+// void	print_rules(int rules[SIDES][SIZE]);
 
 #endif

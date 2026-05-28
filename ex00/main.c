@@ -13,7 +13,7 @@
 #include "rush.h"
 #include <unistd.h>
 
-static t_condition	set_conditions(t_rules rules)
+static t_condition	set_conditions(int rules[SIDES][SIZE])
 {
 	t_condition	conditions;
 	int			i;
@@ -37,7 +37,7 @@ static t_condition	set_conditions(t_rules rules)
 }
 
 static void	initialize(t_condition *conditions, t_pos *pos, t_input *input,
-						t_rules rules)
+						int rules[SIDES][SIZE])
 {
 	int	i;
 	int	j;
@@ -62,7 +62,7 @@ static void	initialize(t_condition *conditions, t_pos *pos, t_input *input,
 
 int	main(int ac, char **av)
 {
-	int			rules[4][SIZE];
+	int			rules[SIDES][SIZE];
 	t_condition	conditions;
 	t_pos		start_pos;
 	t_input		input;

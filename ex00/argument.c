@@ -17,7 +17,7 @@ static inline int	ft_is_valid_num(char c)
 	return (c >= '1' && c <= '9' && c - '0' <= SIZE);
 }
 
-int	validate_args(char *arg, t_rules rules)
+int	validate_args(char *arg, int rules[SIDES][SIZE])
 {
 	int	i;
 
