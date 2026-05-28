@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 20:42:57 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/28 00:20:24 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/28 13:49:48 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,17 @@ static int validate_input(t_condition *condition, t_pos *pos, t_board *board, t_
 	return (1);
 }
 
-static void	adjust_input(t_input *input, int new)
+static void	adjust_input(t_input *input, int new_value, int not_new)
 {
-	if (input->value)
+	if (not_new)
 	{
-		input->horizontal[input->value - 1] = 1;
-		input->vertical[input->value - 1] = 1;
+		input->horizontal[input->value] = 1;
+		input->vertical[input->value] = 1;
+
 	}
-	input->value = new;
-	input->horizontal[input->value - 1] = 0;
-	input->vertical[input->value - 1] = 0;
+	input->value = new_value;
+	input->horizontal[new_value] = 0;
+	input->vertical[new_value] = 0;
 }
 
 int solve(t_condition *condition, t_pos *pos, t_input *input)
@@ -67,7 +68,7 @@ int solve(t_condition *condition, t_pos *pos, t_input *input)
 	{
 		if (input->horizontal[i] == 1 && input->vertical[i] == 1 && validate_input(condition, pos, &board, input))
 		{
-			adjust_input(input, i + 1);
+			adjust_input(input, i + 1, i);
 			if (pos->col == SIZE - 1 && pos->row == SIZE - 1)
 				return print_board(board);
 			if (pos->col == SIZE - 1)
@@ -77,8 +78,8 @@ int solve(t_condition *condition, t_pos *pos, t_input *input)
 			}
 			else
 				pos->col++;
-			if (solve(condition, pos, input) == 0)
-				return (1);
+			if (solve(condition, pos, input) == 1)
+				return print_board(board);
 		}
 		i++;
 	}

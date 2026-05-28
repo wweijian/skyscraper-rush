@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rush.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 18:54:46 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/28 00:19:21 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/28 13:21:44 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 
 # ifndef SIZE
-#  define SIZE 5
+#  define SIZE 4
 # endif
 
 # define MAX_SIZE 9
