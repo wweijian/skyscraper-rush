@@ -12,7 +12,7 @@
 
 #include "rush.h"
 
-int	check_left(int **board, int rules[SIDES][SIZE], int row)
+int	check_left(int *row, int rule)
 {
 	int	i;
 	int	tallest;
@@ -23,13 +23,13 @@ int	check_left(int **board, int rules[SIDES][SIZE], int row)
 	visibility = 0;
 	while (i < SIZE)
 	{
-		visibility += check_visibility(board[row][i], &tallest);
+		visibility += check_visibility(row[i], &tallest);
 		i++;
 	}
-	return (visibility == rules[LEFT][row]);
+	return (visibility == rule);
 }
 
-int	check_right(int **board, int rules[SIDES][SIZE], int row)
+int	check_right(int *row, int rule)
 {
 	int	i;
 	int	tallest;
@@ -40,8 +40,8 @@ int	check_right(int **board, int rules[SIDES][SIZE], int row)
 	visibility = 0;
 	while (i >= 0)
 	{
-		visibility += check_visibility(board[row][i], &tallest);
+		visibility += check_visibility(row[i], &tallest);
 		i--;
 	}
-	return (visibility == rules[RIGHT][row]);
+	return (visibility == rule);
 }

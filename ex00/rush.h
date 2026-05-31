@@ -13,8 +13,6 @@
 #ifndef RUSH_H
 # define RUSH_H
 
-# include <stdio.h>
-
 # ifndef SIZE
 #  define SIZE 4
 #  define ALL_SOLN 24
@@ -42,45 +40,30 @@
 # define LEFT 2
 # define RIGHT 3
 
-typedef struct s_pos
-{
-	int	row;
-	int	col;
-}	t_pos;
-
-typedef enum e_mode
-{
-	SET,
-	GET,
-	FREE,
-}	t_mode;
-
 // validate.c
 int		validate_args(char *arg, int rules[SIDES][SIZE]);
 
 // print.c
 int		print_error(void);
-int		print_board(int **board);
+int		print_board(int board[SIZE][SIZE]);
 
 // check_utils.c
 int		check_visibility(int value, int *tallest);
-void	zero_appeared(int appeared[SIZE][SIZE]);
-int		tallest_remainder(int appeared[SIZE][SIZE], int col);
 
-// check_board.c
-int		check_left(int **board, int rules[SIDES][SIZE], int row);
-int		check_right(int **board, int rules[SIDES][SIZE], int row);
-int		check_vertical(int **board, int rules[SIDES][SIZE], int row);
+// check_horizontal.c
+int		check_left(int *row, int rule);
+int		check_right(int *row, int rule);
 
-// set_solution.c
+// set_solutions.c
 int		malloc_solution(int ***solution);
-int		**set_solution(int ***solution, int pos);
+void	free_solution(int **solution);
+void	set_solution(int **solution);
+int		malloc_options(int ****options);
+void	free_options(int ***options);
+void	set_options(int ***options, int *counts, int **solution,
+			int rules[SIDES][SIZE]);
 
 // solve.c
-int		solve(int **board, int rules[SIDES][SIZE], int row, int **solution);
-
-// debug
-// void	print_conditions(t_condition *condition);
-// void	print_rules(int rules[SIDES][SIZE]);
+int		solve(int ***options, int *counts);
 
 #endif

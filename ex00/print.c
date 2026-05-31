@@ -19,7 +19,7 @@ int	print_error(void)
 	return (1);
 }
 
-int	print_board(int **board)
+int	print_board(int board[SIZE][SIZE])
 {
 	int		i;
 	int		j;
@@ -42,39 +42,3 @@ int	print_board(int **board)
 	}
 	return (1);
 }
-
-/* #include <stdio.h>
-void	print_conditions(t_condition *condition)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < SIZE)
-	{
-		j = 0;
-		while (j < SIZE) {
-			printf("pos: (%d, %d):\t", i, j);
-			printf("top: %d, bottom: %d, left: %d, right: %d\n",
-				condition->top[i][j],
-				condition->bottom[i][j],
-				condition->left[i][j],
-				condition->right[i][j]);
-			j++;
-		}
-		i++;
-	}
-	puts("");
-} 
-	
-void	print_rules(int rules[SIDES][SIZE])
-{
-	for (int i = 0; i < SIDES; i++) {
-		for (int j = 0; j < SIZE; j++) {
-			printf("%d ", rules[i][j]);
-		}
-		printf("\n");
-	}
-}
-	
-*/

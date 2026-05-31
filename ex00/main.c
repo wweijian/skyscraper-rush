@@ -11,30 +11,34 @@
 /* ************************************************************************** */
 
 #include "rush.h"
-#include <unistd.h>
 #include <stdlib.h>
 
 int	main(int ac, char **av)
 {
 	int		**solution;
-	int		**board;
+	int		***options;
+	int		counts[SIZE * 2];
 	int		rules[SIDES][SIZE];
 	int		result;
 
 	result = 0;
 	if (ac != 2
 		|| SIZE > MAX_SIZE
-		|| !validate_args(av[1], rules)
-		|| !malloc_solution(&solution))
+		|| !validate_args(av[1], rules))
 		return (print_error());
-	board = malloc(sizeof(int *) * SIZE);
-	if (board)
+	if (!malloc_solution(&solution))
+		return (print_error());
+	if (!malloc_options(&options))
 	{
-		solution = set_solution(&solution, 0);
-		result = solve(board, rules, 0, solution);
+		free_solution(solution);
+		return (print_error());
 	}
-	free(solution);
+	set_solution(solution);
+	set_options(options, counts, solution, rules);
+	result = solve(options, counts);
+	free_options(options);
+	free_solution(solution);
 	if (!result)
-		return(print_error());
+		return (print_error());
 	return (0);
 }

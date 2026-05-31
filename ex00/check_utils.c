@@ -21,35 +21,3 @@ int	check_visibility(int value, int *tallest)
 	}
 	return (0);
 }
-
-void	zero_appeared(int appeared[SIZE][SIZE])
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < SIZE)
-	{
-		j = 0;
-		while (j < SIZE)
-		{
-			appeared[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-}
-
-int	tallest_remainder(int appeared[SIZE][SIZE], int col)
-{
-	int	i;
-
-	i = SIZE - 1;
-	while (i >= 0)
-	{
-		if (appeared[col][i] == 0)
-			return (i);
-		i--;
-	}
-	return (-1);
-}
