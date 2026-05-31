@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 18:54:46 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/29 12:45:26 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/31 22:36:57 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,68 +37,47 @@
 # define MAX_SIZE 9
 # define SIDES 4
 
+# define TOP 0
+# define BOTTOM 1
+# define LEFT 2
+# define RIGHT 3
+
 typedef struct s_pos
 {
 	int	row;
 	int	col;
 }	t_pos;
 
-typedef struct s_condition
+typedef enum e_mode
 {
-	int	left[SIZE][SIZE];
-	int	right[SIZE][SIZE];
-	int	top[SIZE][SIZE];
-	int	bottom[SIZE][SIZE];
-}	t_condition;
-
-typedef struct s_input
-{
-	int	horizontal[SIZE][SIZE];
-	int	vertical[SIZE][SIZE];
-}	t_input;
+	SET,
+	GET,
+	FREE,
+}	t_mode;
 
 // validate.c
-int			validate_args(char *arg, int rules[SIDES][SIZE]);
+int		validate_args(char *arg, int rules[SIDES][SIZE]);
 
 // print.c
-int			print_error(void);
-int			print_board(int board[SIZE][SIZE]);
+int		print_error(void);
+int		print_board(int **board);
 
 // check_utils.c
-int			check_visibility(int value, int *tallest);
-int			tallest_remainder(int remainder[SIZE]);
+int		check_visibility(int value, int *tallest);
+void	zero_appeared(int appeared[SIZE][SIZE]);
+int		tallest_remainder(int appeared[SIZE][SIZE], int col);
 
 // check_board.c
-int			check_left(int left[SIZE][SIZE], t_pos *pos,
-				int (*board)[SIZE][SIZE],
-				t_input *input);
-int			check_top(int top[SIZE][SIZE], t_pos *pos,
-				int (*board)[SIZE][SIZE],
-				t_input *input);
-int			check_right(int right[SIZE][SIZE], t_pos *pos,
-				int (*board)[SIZE][SIZE],
-				t_input *input);
-int			check_bottom(int bottom[SIZE][SIZE], t_pos *pos,
-				int (*board)[SIZE][SIZE],
-				t_input *input);
+int		check_left(int **board, int rules[SIDES][SIZE], int row);
+int		check_right(int **board, int rules[SIDES][SIZE], int row);
+int		check_vertical(int **board, int rules[SIDES][SIZE], int row);
 
-// init.c
-t_condition	set_conditions(int rules[SIDES][SIZE]);
-t_pos		set_start_pos(void);
-t_input		set_input(void);
-int			malloc_solution(int*** solution);
-void		set_appeared_map(int appeared_map[SIZE]);
+// set_solution.c
+int		malloc_solution(int ***solution);
+int		**set_solution(int ***solution, int pos);
 
 // solve.c
-int			solve(t_condition *condition, t_pos *pos, t_input *input);
-
-// solve_utils.c
-void		adjust_input(t_input *input, int board[SIZE][SIZE], t_pos *pos,
-				int value);
-void		return_input(t_input *input, int board[SIZE][SIZE], t_pos *pos,
-				int value);
-void		go_next_grid(t_pos *pos);
-void		restore_grid(t_pos *pos);
+int		solve(int **board, int rules[SIDES][SIZE], int row, int **solution);
 
 // debug
 // void	print_conditions(t_condition *condition);

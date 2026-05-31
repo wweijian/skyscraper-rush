@@ -1,55 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_utils.c                                      :+:      :+:    :+:   */
+/*   check_horizontal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 23:44:54 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/31 18:20:24 by weijian          ###   ########.fr       */
+/*   Created: 2026/05/27 22:12:47 by weijian           #+#    #+#             */
+/*   Updated: 2026/05/31 20:44:40 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush.h"
 
-int	check_visibility(int value, int *tallest)
-{
-	if (value > *tallest)
-	{
-		*tallest = value;
-		return (1);
-	}
-	return (0);
-}
-
-void	zero_appeared(int appeared[SIZE][SIZE])
+int	check_left(int **board, int rules[SIDES][SIZE], int row)
 {
 	int	i;
-	int	j;
+	int	tallest;
+	int	visibility;
 
 	i = 0;
+	tallest = -1;
+	visibility = 0;
 	while (i < SIZE)
 	{
-		j = 0;
-		while (j < SIZE)
-		{
-			appeared[i][j] = 0;
-			j++;
-		}
+		visibility += check_visibility(board[row][i], &tallest);
 		i++;
 	}
+	return (visibility == rules[LEFT][row]);
 }
 
-int	tallest_remainder(int appeared[SIZE][SIZE], int col)
+int	check_right(int **board, int rules[SIDES][SIZE], int row)
 {
 	int	i;
+	int	tallest;
+	int	visibility;
 
 	i = SIZE - 1;
+	tallest = -1;
+	visibility = 0;
 	while (i >= 0)
 	{
-		if (appeared[col][i] == 0)
-			return (i);
+		visibility += check_visibility(board[row][i], &tallest);
 		i--;
 	}
-	return (-1);
+	return (visibility == rules[RIGHT][row]);
 }

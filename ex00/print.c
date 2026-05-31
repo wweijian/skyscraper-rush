@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 18:54:41 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/29 00:58:01 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/31 20:49:46 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_error(void)
 	return (1);
 }
 
-int	print_board(int board[SIZE][SIZE])
+int	print_board(int **board)
 {
 	int		i;
 	int		j;

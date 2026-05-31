@@ -6,13 +6,14 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 12:27:44 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/29 15:11:34 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/31 22:39:13 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush.h"
+#include <stdlib.h>
 
-int validate_solution(int solution[SIZE], int pos)
+int	validate_solution(int solution[SIZE], int pos)
 {
 	int	i;
 
@@ -24,19 +25,6 @@ int validate_solution(int solution[SIZE], int pos)
 		i++;
 	}
 	return (1);
-}
-
-void	print_array(int *arr)
-{
-	int	i;
-
-	i = 0;
-	while (i < SIZE)
-	{
-		printf("%d ", arr[i]);
-		i++;
-	}
-	printf("\n");
 }
 
 void	copy_array(int *dst, int *src, int size)
@@ -51,7 +39,7 @@ void	copy_array(int *dst, int *src, int size)
 	}
 }
 
-int **set_solution(int ***solution, int pos)
+int	**set_solution(int ***solution, int pos)
 {
 	int			i;
 	static int	count = 0;
@@ -61,21 +49,44 @@ int **set_solution(int ***solution, int pos)
 	while (i < SIZE)
 	{
 		current[pos] = i;
-
 		if (validate_solution(current, pos))
 		{
 			if (pos == SIZE - 1)
 			{
 				copy_array((*solution)[count], current, SIZE);
-				print_array((*solution)[count]);
 				count++;
 			}
 			else
-			{
 				set_solution(solution, pos + 1);
-			}
 		}
 		i++;
 	}
 	return (*solution);
+}
+
+int	malloc_solution(int ***solution)
+{
+	int	i;
+
+	i = 0;
+	*solution = malloc((size_t)ALL_SOLN * sizeof(int *));
+	if (!*solution)
+		return (0);
+	i = 0;
+	while (i < ALL_SOLN)
+	{
+		(*solution)[i] = malloc((size_t)SIZE * sizeof(int));
+		if ((*solution)[i] == NULL)
+		{
+			while (i >= 0)
+			{
+				free((*solution)[i]);
+				i--;
+			}
+			free(*solution);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }

@@ -6,27 +6,36 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 20:42:57 by weijian           #+#    #+#             */
-/*   Updated: 2026/05/29 19:21:11 by weijian          ###   ########.fr       */
+/*   Updated: 2026/05/31 23:05:11 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush.h"
 
-static int	validate_input(t_condition *condition, t_pos *pos,
-							int (*board)[SIZE][SIZE], t_input *input)
+static int	validate_input(int **board, int rules[SIDES][SIZE], int row)
 {
+	if (!check_left(board, rules, row)
+		|| !check_right(board, rules, row)
+		|| !check_vertical(board, rules, row))
+		return (0);
 	return (1);
 }
 
-int	solve(t_condition *condition, t_pos *pos, t_input *input, int **solution)
+int	solve(int **board, int rules[SIDES][SIZE], int row, int **solution)
 {
-	int			i;
-	static int	board[SIZE][SIZE];
+	int	i;
 
 	i = 0;
-	while (i < SIZE)
+	while (i < ALL_SOLN)
 	{
-		
+		board[row] = solution[i];
+		if (validate_input(board, rules, row))
+		{
+			if (row == SIZE - 1)
+				return (print_board(board));
+			if (solve(board, rules, row + 1, solution))
+				return (1);
+		}
 		i++;
 	}
 	return (0);
