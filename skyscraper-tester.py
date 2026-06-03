@@ -58,6 +58,25 @@ def visible_count(line):
     return count
 
 
+def is_unique(square):
+    size = len(square)
+    if not square or any(len(row) != size for row in square):
+        return False
+
+    for row in square:
+        if any(value <= 0 or value > size for value in row):
+            return False
+        if len(set(row)) != size:
+            return False
+
+    for col in range(size):
+        column = [square[row][col] for row in range(size)]
+        if len(set(column)) != size:
+            return False
+
+    return True
+
+
 args = parse_args()
 
 print("filename:", args.filename)
@@ -65,11 +84,11 @@ print("verbose:", args.verbose)
 print("number of tests:", args.n)
 print("size of puzzle:", args.s)
 
-if args.n < 4 or args.s > 9:
+if args.s < 4 or args.s > 9:
     print("Invalid arguments")
     exit(1)
 
-if args.s > 20:
+if args.n > 20:
     print("Too many iterations")
     exit(1)
 
@@ -89,12 +108,14 @@ for i in range(args.n):
     )
     out, err = p.communicate()
     solution = [[int(x) for x in line.split()] for line in out.splitlines()]
-    if out == "Error\n":
+    if out == "Error\n" or err == "Error\n":
         print("\033[31mError\033[0m")
         continue
-    if generate_clues(solution) == clues:
+    if not is_unique(solution):
+        print("\033[31mIncorrect: duplicate\033[0m")
+    elif generate_clues(solution) == clues:
         print("\033[32mCorrect\033[0m")
     else:
-        print("\033[31mIncorrect\033[0m")
+        print("\033[31mIncorrect: mismatched clues\033[0m")
     if args.verbose:
         print(out)
